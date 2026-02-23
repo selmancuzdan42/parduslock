@@ -2,7 +2,7 @@
 
 Okullardaki Pardus işletim sistemli akıllı tahtaları uzaktan yönetmek için geliştirilmiş açık kaynaklı bir sistem.
 
-> Geliştirici: Pendik İTO Ticaret Meslek ve Teknik Anadolu Lisesi
+> Geliştirici: Selman Farisi CÜZDAN - Pendik İTO Mesleki Ve Teknik Anadolu Lisesi
 
 ---
 
