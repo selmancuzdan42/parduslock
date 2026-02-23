@@ -1,0 +1,11 @@
+services:
+  web:
+    build: .
+    container_name: pardus-lock-web
+    ports:
+      - "4234:80"
+    restart: unless-stopped
+    volumes:
+      - /opt/pardus-lock-web/downloads:/usr/share/nginx/html/downloads:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

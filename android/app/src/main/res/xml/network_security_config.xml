@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    HTTP (cleartext) trafiğine izin verir.
+    Üretim ortamında sunucu HTTPS kullanıyorsa bu dosyayı güncelleyin.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

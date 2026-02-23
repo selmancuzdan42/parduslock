@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pardus Akıllı Tahta Kilit Sistemi — Sürüm notları ve güncelleme geçmişi." />
+  <title>Changelog — Pardus Akıllı Tahta Kilit Sistemi</title>
+
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="http://YOUR_SERVER_IP:4234/changelog.html" />
+  <meta property="og:title"       content="Changelog — Pardus Akıllı Tahta Kilit Sistemi" />
+  <meta property="og:description" content="Pardus Akıllı Tahta Kilit Sistemi sürüm notları ve güncelleme geçmişi." />
+  <meta property="og:image"       content="http://YOUR_SERVER_IP:4234/assets/img/favicon.png" />
+  <meta property="og:locale"      content="tr_TR" />
+
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/img/favicon.png" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <style>
+    /* ── CHANGELOG TİMELINE ── */
+    .cl-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+      position: relative;
+    }
+
+    /* Dikey çizgi */
+    .cl-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 36px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      opacity: .25;
+    }
+
+    /* Sürüm bloğu */
+    .cl-entry {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 48px;
+      position: relative;
+    }
+
+    /* Sol — nokta + tarih */
+    .cl-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      width: 50px;
+    }
+
+    .cl-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--accent);
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    .cl-dot.latest {
+      background: var(--accent2);
+      box-shadow: 0 0 0 2px var(--accent2), 0 0 12px rgba(15,163,110,.4);
+    }
+
+    .cl-date {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 8px;
+      white-space: nowrap;
+      writing-mode: horizontal-tb;
+    }
+
+    /* Sağ — kart */
+    .cl-card {
+      flex: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color .2s, transform .2s;
+    }
+    .cl-card:hover {
+      border-color: rgba(26,122,191,.35);
+      transform: translateY(-2px);
+    }
+
+    .cl-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cl-version {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -.01em;
+    }
+
+    .cl-badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .cl-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 99px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .cb-latest  { background: rgba(15,163,110,.15);  color: #0fa36e; border: 1px solid rgba(15,163,110,.25); }
+    .cb-fix     { background: rgba(239,68,68,.12);   color: #ef4444; border: 1px solid rgba(239,68,68,.2); }
+    .cb-feat    { background: rgba(26,122,191,.15);  color: #1a7abf; border: 1px solid rgba(26,122,191,.25); }
+    .cb-ui      { background: rgba(139,92,246,.14);  color: #a78bfa; border: 1px solid rgba(139,92,246,.22); }
+    .cb-perf    { background: rgba(245,158,11,.13);  color: #f59e0b; border: 1px solid rgba(245,158,11,.22); }
+    .cb-sec     { background: rgba(239,68,68,.12);   color: #f87171; border: 1px solid rgba(239,68,68,.2); }
+
+    .cl-card-body { padding: 18px 20px; }
+
+    .cl-summary {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      line-height: 1.65;
+    }
+
+    /* Değişiklik listesi */
+    .cl-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .cl-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .cl-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 99px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .ct-yeni   { background: rgba(26,122,191,.15); color: #60a5fa; }
+    .ct-duzelt { background: rgba(239,68,68,.12);  color: #f87171; }
+    .ct-iyiles { background: rgba(245,158,11,.13); color: #fbbf24; }
+    .ct-guvenl { background: rgba(239,68,68,.12);  color: #f87171; }
+    .ct-arayuz { background: rgba(139,92,246,.14); color: #c4b5fd; }
+
+    /* Ayırıcı */
+    .cl-divider {
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin: -24px 0 40px 74px;
+      letter-spacing: .06em;
+    }
+
+    @media (max-width: 600px) {
+      .cl-wrap::before { left: 20px; }
+      .cl-left { width: 28px; }
+      .cl-dot { width: 11px; height: 11px; }
+      .cl-date { display: none; }
+      .cl-entry { gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/img/favicon.png" alt="Pardus Lock" style="width:34px;height:34px;border-radius:9px;" />
+    Pardus Lock
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html#how">Nasıl Çalışır</a></li>
+    <li><a href="index.html#features">Özellikler</a></li>
+    <li><a href="sss.html">SSS</a></li>
+    <li><a href="fiyat.html">Fiyatlandırma</a></li>
+    <li><a href="changelog.html" class="active">Changelog</a></li>
+    <li><a href="indir.html">İndir</a></li>
+    <li><a href="iletisim.html" class="nav-contact-btn">İletişim</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <span class="badge badge-open">v1.0.2</span>
+    <button class="nav-toggle" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════ DEV BANNER ═══════════════════════════════ -->
+<div class="dev-banner">
+  <span class="dot-pulse"></span>
+  <span><strong>Pendik İTO Ticaret Meslek ve Teknik Anadolu Lisesi</strong> tarafından geliştirilmiştir &nbsp;·&nbsp; Geliştirmeye devam etmektedir</span>
+</div>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<div class="contact-hero">
+  <div class="section-tag reveal">Sürüm Notları</div>
+  <h1 class="reveal">Changelog</h1>
+  <p class="reveal" style="margin-top:12px;">
+    Tüm güncellemeler, düzeltmeler ve yeni özellikler burada yayımlanır.
+  </p>
+</div>
+
+<!-- ═══════════════════════════════ TİMELİNE ═══════════════════════════════ -->
+<div class="cl-wrap">
+
+  <!-- v1.0.2 — En güncel -->
+  <div class="cl-entry reveal">
+    <div class="cl-left">
+      <div class="cl-dot latest"></div>
+      <div class="cl-date">Şub 2026</div>
+    </div>
+    <div class="cl-card">
+      <div class="cl-card-head">
+        <span class="cl-version">v1.0.2</span>
+        <div class="cl-badges">
+          <span class="cl-badge cb-latest">En Güncel</span>
+          <span class="cl-badge cb-feat">Özellik</span>
+          <span class="cl-badge cb-ui">Arayüz</span>
+        </div>
+      </div>
+      <div class="cl-card-body">
+        <p class="cl-summary">
+          Admin kullanıcılar artık giriş yaptıktan sonra QR taramak zorunda değil;
+          okullarına ait tahtaları listeden seçip doğrudan kontrol ekranına geçebiliyor.
+        </p>
+        <ul class="cl-list">
+          <li>
+            <span class="cl-tag ct-yeni">Yeni</span>
+            Admin girişinde okulun tüm tahtaları otomatik olarak listeleniyor; QR okutmaya gerek kalmıyor.
+          </li>
+          <li>
+            <span class="cl-tag ct-yeni">Yeni</span>
+            Her tahtanın anlık online/offline durumu yeşil veya gri nokta ile gösteriliyor.
+          </li>
+          <li>
+            <span class="cl-tag ct-yeni">Yeni</span>
+            Listeden bir tahtaya tıklamak yeterli; kilit aç/kapat ve slayt komutları anında çalışıyor.
+          </li>
+          <li>
+            <span class="cl-tag ct-iyiles">İyileştirme</span>
+            Öğretmen hesapları eski QR tarama akışını kullanmaya devam ediyor.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- v1.0.1 -->
+  <div class="cl-entry reveal">
+    <div class="cl-left">
+      <div class="cl-dot"></div>
+      <div class="cl-date">Şub 2026</div>
+    </div>
+    <div class="cl-card">
+      <div class="cl-card-head">
+        <span class="cl-version">v1.0.1</span>
+        <div class="cl-badges">
+          <span class="cl-badge cb-ui">Arayüz</span>
+          <span class="cl-badge cb-fix">Düzeltme</span>
+        </div>
+      </div>
+      <div class="cl-card-body">
+        <p class="cl-summary">
+          Mobil uygulama küçük hatalar giderildi, kurulum deneyimi iyileştirildi.
+        </p>
+        <ul class="cl-list">
+          <li>
+            <span class="cl-tag ct-iyiles">İyileştirme</span>
+            Kurulum komutu kopyalama butonu HTTP ortamında da güvenilir şekilde çalışacak şekilde güncellendi.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- v1.0.0 -->
+  <div class="cl-entry reveal">
+    <div class="cl-left">
+      <div class="cl-dot"></div>
+      <div class="cl-date">Oca 2026</div>
+    </div>
+    <div class="cl-card">
+      <div class="cl-card-head">
+        <span class="cl-version">v1.0.0</span>
+        <div class="cl-badges">
+          <span class="cl-badge cb-feat">İlk Sürüm</span>
+        </div>
+      </div>
+      <div class="cl-card-body">
+        <p class="cl-summary">
+          Pardus Akıllı Tahta Kilit Sistemi'nin ilk kararlı sürümü. Temel özellikler tamamlandı.
+        </p>
+        <ul class="cl-list">
+          <li>
+            <span class="cl-tag ct-yeni">Yeni</span>
+            QR kod ile tahta bağlantısı — tek okutmayla anlık bağlantı kurulur.
+          </li>
+          <li>
+            <span class="cl-tag ct-yeni">Yeni</span>
+            Android ve iOS mobil uygulamaları yayımlandı.
+          </li>
+          <li>
+            <span class="cl-tag ct-yeni">Yeni</span>
+            Flask tabanlı sunucu — API ve admin paneli.
+          </li>
+          <li>
+            <span class="cl-tag ct-yeni">Yeni</span>
+            Tahta istemcisi Debian 10, 11, 12 ve Pardus sürümleri için ayrı paketlerle sunuldu.
+          </li>
+          <li>
+            <span class="cl-tag ct-yeni">Yeni</span>
+            Rol tabanlı yetkilendirme — Öğretmen ve Admin rolleri.
+          </li>
+          <li>
+            <span class="cl-tag ct-yeni">Yeni</span>
+            Komut TTL (30 sn) — eski komutlar otomatik iptal edilir.
+          </li>
+          <li>
+            <span class="cl-tag ct-guvenl">Güvenlik</span>
+            Giriş denemesi sınırı — 5 başarısız denemede 10 dakika kilitleme.
+          </li>
+          <li>
+            <span class="cl-tag ct-guvenl">Güvenlik</span>
+            Bcrypt ile şifre hashleme, tahta başına özel agent secret.
+          </li>
+          <li>
+            <span class="cl-tag ct-yeni">Yeni</span>
+            Curl tabanlı tek satır kurulum komutu.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="cl-divider">— Geliştirme tarihi —</div>
+
+  <!-- v0.9 beta -->
+  <div class="cl-entry reveal">
+    <div class="cl-left">
+      <div class="cl-dot"></div>
+      <div class="cl-date">Ara 2025</div>
+    </div>
+    <div class="cl-card">
+      <div class="cl-card-head">
+        <span class="cl-version">v0.9 — Beta</span>
+        <div class="cl-badges">
+          <span class="cl-badge cb-perf">Beta</span>
+        </div>
+      </div>
+      <div class="cl-card-body">
+        <p class="cl-summary">
+          İlk kapalı beta sürümü. Temel komut akışı test edildi, okul ortamında pilot çalışma yapıldı.
+        </p>
+        <ul class="cl-list">
+          <li>
+            <span class="cl-tag ct-yeni">Yeni</span>
+            Kilit aç / kilitle / önceki slayt / sonraki slayt komutları.
+          </li>
+          <li>
+            <span class="cl-tag ct-yeni">Yeni</span>
+            WebSocket tabanlı gerçek zamanlı komut iletimi (ilk prototip).
+          </li>
+          <li>
+            <span class="cl-tag ct-iyiles">İyileştirme</span>
+            Flask polling mimarisine geçildi, daha kararlı bağlantı sağlandı.
+          </li>
+          <li>
+            <span class="cl-tag ct-duzelt">Düzelt</span>
+            Tahta istemcisinin yeniden başlatma sonrası bağlantı kopması sorunu giderildi.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/img/favicon.png" alt="Pardus Lock" style="width:34px;height:34px;border-radius:9px;" />
+        Pardus Lock
+      </a>
+      <p>
+        Pardus işletim sistemli akıllı tahtaları mobil uygulama ile
+        güvenli ve kolay yönetmek için geliştirilmiş sistem.
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Sayfalar</h4>
+      <ul>
+        <li><a href="index.html#how">Nasıl Çalışır</a></li>
+        <li><a href="index.html#features">Özellikler</a></li>
+        <li><a href="sss.html">SSS</a></li>
+        <li><a href="fiyat.html">Fiyatlandırma</a></li>
+        <li><a href="changelog.html">Changelog</a></li>
+        <li><a href="indir.html">İndir</a></li>
+        <li><a href="iletisim.html">İletişim</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Proje</h4>
+      <ul>
+        <li><a href="https://www.pardus.org.tr" target="_blank" rel="noopener">Pardus Resmi Site</a></li>
+        <li><a href="changelog.html">Changelog</a></li>
+        <li><a href="indir.html">İndir</a></li>
+        <li><a href="iletisim.html">Hata Bildir</a></li>
+        <li><a href="iletisim.html">İletişim</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-school">
+      🏫 Pendik İTO Ticaret Meslek ve Teknik Anadolu Lisesi — Öğrenci Projesi
+    </div>
+    <span>Geliştirmeye devam etmektedir</span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

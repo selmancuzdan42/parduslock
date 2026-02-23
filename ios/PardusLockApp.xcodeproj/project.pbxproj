@@ -1,0 +1,417 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A0658EB35DCB48D2A2B46CF5 /* PardusLockAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263965CAED0F43599920EA03 /* PardusLockAppApp.swift */; };
+		2C29AFDE74B541B68B351916 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B6A9917D174145814C8832 /* Constants.swift */; };
+		D9D6733645164A0AB16A3E35 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE7B7075948417A8112ED5C /* Models.swift */; };
+		CDC98E45AD6E46D5B7232741 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F435D474394B06BEAFDB35 /* APIClient.swift */; };
+		88F39555FA3B4DFD977D50AB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE010B779EC4077BFC22D49 /* LoginView.swift */; };
+		787D8F0076344DE3BB3C81B5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32CD54B1D00540CA92D3BC90 /* LoginViewModel.swift */; };
+		65DC071649F547F3B2E38FFA /* QRScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55050CA6651496ABC12FDBF /* QRScanView.swift */; };
+		BEC64074E35C4867B1FB5B0D /* QRScanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5E05F30A8E446688AA8799 /* QRScanViewModel.swift */; };
+		A001C8F943E3445A91AE1546 /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8CB5FC8E0C48DC92C19456 /* CameraPreviewView.swift */; };
+		9F6EDB1E2E294598BEE745E9 /* ControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B43B9757FD46BB93118A65 /* ControllerView.swift */; };
+		B70522A355F443D7AEDCF24C /* ControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4E0A152824402B977614F6 /* ControllerViewModel.swift */; };
+		5B73EF2CD92C41FB869A2477 /* AdminView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AB43E1575449BB8F6E92ED /* AdminView.swift */; };
+		355AD5C4505440569BA057A3 /* AdminViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0D10C4FDA4F42AF9ADEEF /* AdminViewModel.swift */; };
+		BF9A94D17B954820A16EE723 /* UserRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F47440D4842421C9B2EDE4A /* UserRowView.swift */; };
+		A55590D21F555F2FFDFD0A1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 666F7B1259490F17D96B4BF8 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DC6C5BE0C6CD4734AFA963E1 /* PardusLockApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PardusLockApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		263965CAED0F43599920EA03 /* PardusLockAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PardusLockAppApp.swift; sourceTree = "<group>"; };
+		00D8FC35FCE54D54BD8314CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4B6A9917D174145814C8832 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CFE7B7075948417A8112ED5C /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		C2F435D474394B06BEAFDB35 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		1EE010B779EC4077BFC22D49 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		32CD54B1D00540CA92D3BC90 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		E55050CA6651496ABC12FDBF /* QRScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanView.swift; sourceTree = "<group>"; };
+		BC5E05F30A8E446688AA8799 /* QRScanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanViewModel.swift; sourceTree = "<group>"; };
+		6E8CB5FC8E0C48DC92C19456 /* CameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
+		19B43B9757FD46BB93118A65 /* ControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerView.swift; sourceTree = "<group>"; };
+		7F4E0A152824402B977614F6 /* ControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerViewModel.swift; sourceTree = "<group>"; };
+		E9AB43E1575449BB8F6E92ED /* AdminView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminView.swift; sourceTree = "<group>"; };
+		0EC0D10C4FDA4F42AF9ADEEF /* AdminViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewModel.swift; sourceTree = "<group>"; };
+		8F47440D4842421C9B2EDE4A /* UserRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRowView.swift; sourceTree = "<group>"; };
+		666F7B1259490F17D96B4BF8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CEC26107D3DB47978800895E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		448637CAEB374102B0A67089 /* PardusLockApp */ = {
+			isa = PBXGroup;
+			children = (
+				30D95A131B9E41E581D95231 /* App */,
+				F6A75866E2644DA19415F0A4 /* Data */,
+				985BE178EC314B548F096C5C /* UI */,
+				666F7B1259490F17D96B4BF8 /* Assets.xcassets */,
+				00D8FC35FCE54D54BD8314CD /* Info.plist */,
+				FD0EC3DC1D4D443ABE1C74CE /* Products */,
+			);
+			name = PardusLockApp;
+			sourceTree = "<group>";
+		};
+		FD0EC3DC1D4D443ABE1C74CE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DC6C5BE0C6CD4734AFA963E1 /* PardusLockApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		30D95A131B9E41E581D95231 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				263965CAED0F43599920EA03 /* PardusLockAppApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F6A75866E2644DA19415F0A4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C4B6A9917D174145814C8832 /* Constants.swift */,
+				CFE7B7075948417A8112ED5C /* Models.swift */,
+				C2F435D474394B06BEAFDB35 /* APIClient.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		985BE178EC314B548F096C5C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				EC2E25AD6D6442DC88F3D00F /* Login */,
+				595A0F18F375484582FC1D76 /* QRScan */,
+				A3006FF1E19246F7A1D3C649 /* Controller */,
+				5C1CE71BAFD443E3AC349974 /* Admin */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		EC2E25AD6D6442DC88F3D00F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1EE010B779EC4077BFC22D49 /* LoginView.swift */,
+				32CD54B1D00540CA92D3BC90 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		595A0F18F375484582FC1D76 /* QRScan */ = {
+			isa = PBXGroup;
+			children = (
+				E55050CA6651496ABC12FDBF /* QRScanView.swift */,
+				BC5E05F30A8E446688AA8799 /* QRScanViewModel.swift */,
+				6E8CB5FC8E0C48DC92C19456 /* CameraPreviewView.swift */,
+			);
+			path = QRScan;
+			sourceTree = "<group>";
+		};
+		A3006FF1E19246F7A1D3C649 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				19B43B9757FD46BB93118A65 /* ControllerView.swift */,
+				7F4E0A152824402B977614F6 /* ControllerViewModel.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5C1CE71BAFD443E3AC349974 /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				E9AB43E1575449BB8F6E92ED /* AdminView.swift */,
+				0EC0D10C4FDA4F42AF9ADEEF /* AdminViewModel.swift */,
+				8F47440D4842421C9B2EDE4A /* UserRowView.swift */,
+			);
+			path = Admin;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		35FDC1D95A2647008D1DD1D9 /* PardusLockApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 780F8EB36FBD4806969E3E63 /* Build configuration list for PBXNativeTarget "PardusLockApp" */;
+			buildPhases = (
+				73651112CAD944CDA87C8129 /* Sources */,
+				CEC26107D3DB47978800895E /* Frameworks */,
+				42D07E7BF6E9419ABE5414E0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PardusLockApp;
+			productName = PardusLockApp;
+			productReference = DC6C5BE0C6CD4734AFA963E1 /* PardusLockApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		264E5A0E38164126B512D4C3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					35FDC1D95A2647008D1DD1D9 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 48EDB833E5CB4B6D8E25E4BF /* Build configuration list for PBXProject "PardusLockApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = tr;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				tr,
+				Base,
+			);
+			mainGroup = 448637CAEB374102B0A67089 /* PardusLockApp */;
+			productRefGroup = FD0EC3DC1D4D443ABE1C74CE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				35FDC1D95A2647008D1DD1D9 /* PardusLockApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		42D07E7BF6E9419ABE5414E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55590D21F555F2FFDFD0A1C /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		73651112CAD944CDA87C8129 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0658EB35DCB48D2A2B46CF5 /* PardusLockAppApp.swift in Sources */,
+				2C29AFDE74B541B68B351916 /* Constants.swift in Sources */,
+				D9D6733645164A0AB16A3E35 /* Models.swift in Sources */,
+				CDC98E45AD6E46D5B7232741 /* APIClient.swift in Sources */,
+				88F39555FA3B4DFD977D50AB /* LoginView.swift in Sources */,
+				787D8F0076344DE3BB3C81B5 /* LoginViewModel.swift in Sources */,
+				65DC071649F547F3B2E38FFA /* QRScanView.swift in Sources */,
+				BEC64074E35C4867B1FB5B0D /* QRScanViewModel.swift in Sources */,
+				A001C8F943E3445A91AE1546 /* CameraPreviewView.swift in Sources */,
+				9F6EDB1E2E294598BEE745E9 /* ControllerView.swift in Sources */,
+				B70522A355F443D7AEDCF24C /* ControllerViewModel.swift in Sources */,
+				5B73EF2CD92C41FB869A2477 /* AdminView.swift in Sources */,
+				355AD5C4505440569BA057A3 /* AdminViewModel.swift in Sources */,
+				BF9A94D17B954820A16EE723 /* UserRowView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9177E042411D4CDB95F494A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_CYCLE = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3093B0934AB44B38A56707BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_CYCLE = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		98703915896F4CF1BDE7746F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PardusLockApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pardus.PardusLockApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6A059AD3FAAF4A3A80CD86AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PardusLockApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pardus.PardusLockApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		48EDB833E5CB4B6D8E25E4BF /* Build configuration list for PBXProject "PardusLockApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9177E042411D4CDB95F494A4 /* Debug */,
+				3093B0934AB44B38A56707BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		780F8EB36FBD4806969E3E63 /* Build configuration list for PBXNativeTarget "PardusLockApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				98703915896F4CF1BDE7746F /* Debug */,
+				6A059AD3FAAF4A3A80CD86AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 264E5A0E38164126B512D4C3 /* Project object */;
+}

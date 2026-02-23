@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etSchoolCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Okul Kodu (ör: 550292)"
+        android:inputType="text"
+        android:layout_marginBottom="10dp" />
+
+    <EditText
+        android:id="@+id/etSchoolName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Okul Adı"
+        android:inputType="text"
+        android:layout_marginBottom="10dp" />
+
+    <EditText
+        android:id="@+id/etStartDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Başlangıç Tarihi (YYYY-AA-GG)"
+        android:inputType="text"
+        android:layout_marginBottom="10dp" />
+
+    <EditText
+        android:id="@+id/etDuration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Süre (ay)"
+        android:inputType="number" />
+
+</LinearLayout>

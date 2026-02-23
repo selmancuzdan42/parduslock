@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pardus Kilit</string>
+
+    <!-- Setup -->
+    <string name="setup_title">Sunucu Bağlantısı</string>
+    <string name="setup_hint">Sunucu adresi (ör. http://192.168.1.100:5000)</string>
+    <string name="btn_connect">Bağlan</string>
+
+    <!-- QR Scan -->
+    <string name="qr_scan_title">QR Kodu Tarayın</string>
+    <string name="btn_cancel">İptal</string>
+
+    <!-- Login -->
+    <string name="login_title">Giriş Yap</string>
+    <string name="hint_server_url">Sunucu Adresi</string>
+    <string name="hint_token">QR Token (opsiyonel)</string>
+    <string name="hint_username">Kullanıcı Adı</string>
+    <string name="hint_password">Şifre</string>
+    <string name="btn_scan_qr">QR Tara</string>
+    <string name="btn_login">Giriş Yap</string>
+
+    <!-- Controller -->
+    <string name="btn_unlock">🔓 Kilidi Aç</string>
+    <string name="btn_lock">🔒 Kilitle</string>
+    <string name="btn_prev">◀ Önceki</string>
+    <string name="btn_next">Sonraki ▶</string>
+    <string name="btn_admin_panel">Kullanıcı Yönetimi</string>
+    <string name="btn_logout">Çıkış</string>
+
+    <!-- Admin -->
+    <string name="admin_title">Kullanıcı Yönetimi</string>
+    <string name="btn_add_user">Kullanıcı Ekle</string>
+    <string name="btn_delete">Sil</string>
+    <string name="btn_change_password">Şifre Değiştir</string>
+    <string name="add_user_sheet_title">Yeni Kullanıcı</string>
+    <string name="hint_full_name">Ad Soyad</string>
+    <string name="hint_new_password">Yeni Şifre (min 6 karakter)</string>
+    <string name="role_teacher">Öğretmen</string>
+    <string name="role_admin">Yönetici</string>
+    <string name="btn_save">Kaydet</string>
+    <string name="btn_add">Ekle</string>
+    <string name="btn_back">Geri</string>
+
+    <!-- Boards -->
+    <string name="boards_title">Tahta Yönetimi</string>
+    <string name="btn_boards">Tahtalar</string>
+    <string name="btn_permissions">Yetkiler</string>
+
+    <!-- Dashboard -->
+    <string name="btn_dashboard">Dashboard</string>
+</resources>

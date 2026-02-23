@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanıcı Yönetimi</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #f0f2f5;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #2C3E50;
+            padding: 24px 16px;
+        }
+
+        .container { max-width: 760px; margin: 0 auto; }
+
+        h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #2C3E50;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 28px;
+        }
+
+        /* --- Kart --- */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            margin-bottom: 24px;
+        }
+
+        .card h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1.5px solid #f0f2f5;
+        }
+
+        /* --- Tablo --- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 8px 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1.5px solid #f0f2f5;
+        }
+
+        td {
+            padding: 11px 12px;
+            border-bottom: 1px solid #f8f9fa;
+            vertical-align: middle;
+        }
+
+        tr:last-child td { border-bottom: none; }
+
+        .role-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .role-admin   { background: #fdecea; color: #c0392b; }
+        .role-teacher { background: #eaf6fb; color: #2980b9; }
+
+        /* --- Formlar --- */
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex: 1;
+            min-width: 130px;
+        }
+
+        label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        select {
+            padding: 9px 11px;
+            border: 1.5px solid #ddd;
+            border-radius: 7px;
+            font-size: 0.88rem;
+            color: #2C3E50;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus { border-color: #4CA1AF; }
+
+        /* --- Butonlar --- */
+        .btn {
+            padding: 9px 18px;
+            border: none;
+            border-radius: 7px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+
+        .btn:hover { opacity: 0.85; }
+
+        .btn-primary { background: linear-gradient(135deg, #2C3E50, #4CA1AF); color: white; }
+        .btn-danger  { background: #e74c3c; color: white; padding: 6px 12px; font-size: 0.8rem; }
+        .btn-warning { background: #f39c12; color: white; padding: 6px 12px; font-size: 0.8rem; }
+
+        /* --- Modal --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal {
+            background: white;
+            border-radius: 12px;
+            padding: 28px 24px;
+            width: 100%;
+            max-width: 340px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        }
+
+        .modal h3 { font-size: 1rem; margin-bottom: 16px; }
+        .modal .form-group { margin-bottom: 12px; flex: none; min-width: auto; width: 100%; }
+        .modal-actions { display: flex; gap: 10px; margin-top: 18px; }
+        .modal-actions .btn { flex: 1; text-align: center; }
+        .btn-secondary { background: #ecf0f1; color: #555; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kullanıcı Yönetimi</h1>
+        <p class="subtitle">Giriş yapan: <strong>{{ current_username }}</strong></p>
+
+        <!-- Kullanıcı Listesi -->
+        <div class="card">
+            <h2>Kayıtlı Kullanıcılar</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ad Soyad</th>
+                        <th>Kullanıcı Adı</th>
+                        <th>Rol</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.full_name }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>
+                            <span class="role-badge role-{{ user.role }}">
+                                {{ 'Yönetici' if user.role == 'admin' else 'Öğretmen' }}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-warning"
+                                onclick="openPasswordModal({{ user.id }}, '{{ user.full_name }}')">
+                                Şifre
+                            </button>
+                            {% if user.username != current_username %}
+                            <form method="POST" action="/admin/delete_user/{{ user.id }}"
+                                  style="display:inline"
+                                  onsubmit="return confirm('{{ user.full_name }} silinsin mi?')">
+                                <button type="submit" class="btn btn-danger">Sil</button>
+                            </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Yeni Kullanıcı Ekle -->
+        <div class="card">
+            <h2>Yeni Kullanıcı Ekle</h2>
+            <form method="POST" action="/admin/add_user">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Ad Soyad</label>
+                        <input type="text" name="full_name" placeholder="Ahmet Yılmaz" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Kullanıcı Adı</label>
+                        <input type="text" name="username" placeholder="ahmet.yilmaz" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Şifre</label>
+                        <input type="password" name="password" placeholder="En az 6 karakter" required>
+                    </div>
+                    <div class="form-group" style="max-width:130px;">
+                        <label>Rol</label>
+                        <select name="role">
+                            <option value="teacher">Öğretmen</option>
+                            <option value="admin">Yönetici</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex:none;">
+                        <label>&nbsp;</label>
+                        <button type="submit" class="btn btn-primary">Ekle</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Şifre Değiştir Modal -->
+    <div class="modal-overlay" id="passwordModal">
+        <div class="modal">
+            <h3 id="modalTitle">Şifre Değiştir</h3>
+            <form method="POST" action="/admin/change_password">
+                <input type="hidden" name="user_id" id="modalUserId">
+                <div class="form-group">
+                    <label>Yeni Şifre</label>
+                    <input type="password" name="new_password" placeholder="En az 6 karakter" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary"
+                            onclick="closePasswordModal()">İptal</button>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openPasswordModal(userId, fullName) {
+            document.getElementById('modalUserId').value = userId;
+            document.getElementById('modalTitle').textContent = fullName + ' – Şifre Değiştir';
+            document.getElementById('passwordModal').classList.add('active');
+        }
+        function closePasswordModal() {
+            document.getElementById('passwordModal').classList.remove('active');
+        }
+    </script>
+</body>
+</html>

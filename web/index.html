@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pardus işletim sistemli akıllı tahtaları telefonunuzdan yönetin. QR kod ile hızlı, güvenli kontrol." />
+  <title>Pardus Akıllı Tahta Kilit Sistemi</title>
+
+  <!-- Open Graph (WhatsApp, Telegram, Discord vb. önizleme) -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="http://YOUR_SERVER_IP:4234/" />
+  <meta property="og:title"       content="Pardus Akıllı Tahta Kilit Sistemi" />
+  <meta property="og:description" content="Akıllı tahtaları telefonunuzdan yönetin. QR kod ile hızlı ve güvenli kontrol. Pendik İTO Ticaret MTAL tarafından geliştirilmiştir." />
+  <meta property="og:image"       content="http://YOUR_SERVER_IP:4234/assets/img/favicon.png" />
+  <meta property="og:image:width"  content="192" />
+  <meta property="og:image:height" content="192" />
+  <meta property="og:locale"      content="tr_TR" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary" />
+  <meta name="twitter:title"       content="Pardus Akıllı Tahta Kilit Sistemi" />
+  <meta name="twitter:description" content="Akıllı tahtaları telefonunuzdan yönetin. QR kod ile hızlı ve güvenli kontrol." />
+  <meta name="twitter:image"       content="http://YOUR_SERVER_IP:4234/assets/img/favicon.png" />
+
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/img/favicon.png" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/img/favicon.png" alt="Pardus Lock" style="width:34px;height:34px;border-radius:9px;" />
+    Pardus Lock
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#how">Nasıl Çalışır</a></li>
+    <li><a href="#features">Özellikler</a></li>
+    <li><a href="sss.html">SSS</a></li>
+    <li><a href="fiyat.html">Fiyatlandırma</a></li>
+    <li><a href="indir.html">İndir</a></li>
+    <li><a href="iletisim.html" class="nav-contact-btn">İletişim</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <span class="badge badge-open">v1.0</span>
+    <button class="nav-toggle" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════ DEV BANNER ═══════════════════════════════ -->
+<div class="dev-banner">
+  <span class="dot-pulse"></span>
+  <span><strong>Pendik İTO Ticaret Meslek ve Teknik Anadolu Lisesi</strong> tarafından geliştirilmiştir &nbsp;·&nbsp; Geliştirmeye devam etmektedir</span>
+</div>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-school-badge reveal">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l7 3.5v4.1C15 12.5 11.9 15.7 8 16.5 4.1 15.7 1 12.5 1 8.6V4.5L8 1z"/></svg>
+        Pendik İTO Ticaret MTAL — Öğrenci Projesi
+      </div>
+
+      <div class="hero-eyebrow reveal">
+        <span></span>
+        Pardus İşletim Sistemi için Tasarlandı
+      </div>
+
+      <h1 class="reveal">
+        Sınıf Tahtanızı<br />
+        <span class="highlight">Telefonunuzdan</span><br />
+        Yönetin
+      </h1>
+
+      <p class="hero-desc reveal">
+        Artık tahtayı açmak veya kapatmak için sınıfın karşısına geçmenize gerek yok.
+        Telefonunuzla QR kodu okutun, tek tuşla komut gönderin — dakikalar değil,
+        <strong style="color:var(--text)">saniyeler içinde</strong>.
+      </p>
+
+      <div class="hero-cta reveal">
+        <a href="#how" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4l3 3"/>
+          </svg>
+          Nasıl Çalışır?
+        </a>
+        <a href="iletisim.html" class="btn btn-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          İletişime Geç
+        </a>
+      </div>
+
+      <div class="hero-stats reveal">
+        <div class="hero-stat">
+          <div class="num"><span class="stat-num" data-target="4" data-suffix="">0</span></div>
+          <div class="lbl">Bileşen</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num"><span class="stat-num" data-target="2" data-suffix="">0</span></div>
+          <div class="lbl">Mobil Platform</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num"><span class="stat-num" data-target="30" data-suffix="sn">0</span></div>
+          <div class="lbl">Komut Zaman Aşımı</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num"><span class="stat-num" data-target="2" data-suffix="ay">0</span></div>
+          <div class="lbl">Ücretsiz Deneme</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Telefon Mockup -->
+    <div class="phone-wrapper reveal-right">
+      <div class="phone float-anim">
+        <div class="phone-bar"></div>
+        <div class="phone-header">
+          <div class="pname">Ahmet Yıldız</div>
+          <div class="pboard">Tahta: B-201 &nbsp;·&nbsp; Biyoloji Sınıfı</div>
+          <span class="prole">Öğretmen</span>
+        </div>
+        <div class="phone-body">
+          <div class="phone-grid">
+            <div class="phone-cmd cmd-unlock">
+              <span class="picon">🔓</span>
+              <span class="plabel">Kilit Aç</span>
+            </div>
+            <div class="phone-cmd cmd-lock">
+              <span class="picon">🔒</span>
+              <span class="plabel">Kilitle</span>
+            </div>
+            <div class="phone-cmd cmd-prev">
+              <span class="picon">◀</span>
+              <span class="plabel">Önceki Slayt</span>
+            </div>
+            <div class="phone-cmd cmd-next">
+              <span class="picon">▶</span>
+              <span class="plabel">Sonraki Slayt</span>
+            </div>
+          </div>
+          <div class="phone-status">✓ Komut gönderildi — Tahta B-201</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ HOW IT WORKS ═══════════════════════════════ -->
+<section class="section" id="how">
+  <div class="section-inner">
+    <div class="section-tag reveal">Nasıl Çalışır</div>
+    <h2 class="section-title reveal">Dört Adımda Kullanım</h2>
+    <p class="section-desc reveal">
+      Teknik bilgi gerektirmez. Uygulamayı açın, QR okutun ve gönder tuşuna basın.
+    </p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">1</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content reveal">
+          <span class="step-icon">📺</span>
+          <h3>Tahta, ekranında QR kod gösterir</h3>
+          <p>
+            Pardus işletim sistemli her akıllı tahta açıldığında ekranında
+            kendine özgü bir QR kod görüntüler. Bu kod o tahtaya ait benzersiz
+            bir kimlik taşır — başka bir tahtayla karıştırılması mümkün değildir.
+          </p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">2</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content reveal">
+          <span class="step-icon">📱</span>
+          <h3>Telefonunuzla QR kodu okutun</h3>
+          <p>
+            Android veya iOS uygulamasını açıp kameranızı tahtaya doğrultun.
+            QR kod otomatik tanınır. Ekstra tuşa basmanıza gerek yoktur — uygulama
+            sizi doğrudan o tahtanın kontrol ekranına götürür.
+          </p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">3</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content reveal">
+          <span class="step-icon">☁️</span>
+          <h3>Komutunuz güvenle sunucuya iletilir</h3>
+          <p>
+            Uygulamada bir komut (örneğin "Kilit Aç") seçtiğinizde bu komut şifreli
+            olarak merkezi sunucuya gönderilir. Sunucu kimliğinizi ve o tahtayı
+            kullanma yetkinizi doğrular. Yetkisiz işlem yapılması engellenmiştir.
+          </p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-left">
+          <div class="step-num">4</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content reveal">
+          <span class="step-icon">✅</span>
+          <h3>Tahta komutu anında uygular</h3>
+          <p>
+            Tahta sürekli olarak (her 2 saniyede bir) sunucuyu kontrol eder.
+            Komutu aldığı anda uygular ve sonucu sunucuya bildirir. 30 saniye
+            içinde tahta ulaşamazsa komut otomatik iptal edilir — yanlış zamanda
+            çalışma riski yoktur.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ COMMANDS ═══════════════════════════════ -->
+<section class="section" id="commands" style="background:var(--bg2);">
+  <div class="section-inner">
+    <div class="section-tag reveal">Komutlar</div>
+    <h2 class="section-title reveal">Neler Yapabilirsiniz?</h2>
+    <p class="section-desc reveal">
+      Uygulamada dört temel komut bulunur. Her biri farklı bir ihtiyaca cevap verir.
+    </p>
+
+    <div class="commands-grid">
+      <div class="command-card cc-unlock reveal">
+        <span class="command-icon">🔓</span>
+        <h3>Kilit Aç</h3>
+        <p>
+          Tahtanın kilit ekranını kaldırır ve normal kullanıma hazır hale getirir.
+          Dersin başında veya mola sonrasında kullanılır. Sadece yetkili
+          kullanıcılar bu komutu gönderebilir.
+        </p>
+      </div>
+      <div class="command-card cc-lock reveal">
+        <span class="command-icon">🔒</span>
+        <h3>Kilitle</h3>
+        <p>
+          Tahtanın ekranını kilitler ve QR kodunu yeniden gösterir. Dersin
+          bitişinde, sınav anında veya öğrencilerin dikkati dağıtılmaması
+          gereken anlarda kullanılır.
+        </p>
+      </div>
+      <div class="command-card cc-prev reveal">
+        <span class="command-icon">◀</span>
+        <h3>Önceki Slayt</h3>
+        <p>
+          Tahtadaki sunumdaki bir önceki slayta geçer. Tahtanın yanına gitmeden
+          sınıfın içinden prezentasyonu kontrol edebilirsiniz.
+        </p>
+      </div>
+      <div class="command-card cc-next reveal">
+        <span class="command-icon">▶</span>
+        <h3>Sonraki Slayt</h3>
+        <p>
+          Tahtadaki sunumdaki bir sonraki slayta geçer. Akıcı ders anlatımı için
+          öğrencilerle göz temasını kesmeden slayt kontrolü yapabilirsiniz.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FEATURES ═══════════════════════════════ -->
+<section class="section" id="features">
+  <div class="section-inner">
+    <div class="section-tag reveal">Özellikler</div>
+    <h2 class="section-title reveal">Sistemi Öne Çıkaran Özellikler</h2>
+    <p class="section-desc reveal">
+      Sadece komut göndermekten fazlası — güvenli, takip edilebilir ve ölçeklenebilir bir sistem.
+    </p>
+
+    <div class="features-grid">
+      <div class="feat-card reveal">
+        <div class="feat-icon-wrap" style="background:rgba(26,122,191,.12);">🎯</div>
+        <h3>Her Tahta Bağımsız Hedeflenir</h3>
+        <p>
+          Bir komut her zaman belirli bir tahtaya gönderilir. "Tüm tahtaları aç"
+          gibi toplu komutlar sistem tarafından engellenir. Yanlışlıkla tüm
+          okuldaki tahtaların açılması imkânsızdır.
+        </p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon-wrap" style="background:rgba(15,163,110,.12);">👥</div>
+        <h3>Rol Tabanlı Yetkilendirme</h3>
+        <p>
+          Sistemde iki rol vardır: <strong style="color:var(--text)">Yönetici</strong>
+          ve <strong style="color:var(--text)">Öğretmen</strong>. Öğretmenler yalnızca
+          kendilerine atanan tahtaları görebilir ve kontrol edebilir.
+          Başka sınıflara müdahale edemezler.
+        </p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon-wrap" style="background:rgba(245,158,11,.12);">⏱️</div>
+        <h3>Otomatik Komut İptali (30 Saniye)</h3>
+        <p>
+          Gönderilen bir komut 30 saniye içinde tahta tarafından alınamazsa
+          otomatik olarak iptal edilir. Elektrik kesintisi veya ağ sorunu
+          sırasında birikmiş komutların aniden çalışması engellenir.
+        </p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon-wrap" style="background:rgba(167,139,250,.12);">📋</div>
+        <h3>Tam Denetim Günlüğü</h3>
+        <p>
+          Kim, ne zaman, hangi tahtaya, hangi komutu gönderdi? Tüm işlemler
+          IP adresiyle birlikte kayıt altına alınır. Okul yönetimi istediği
+          zaman geçmişe bakabilir.
+        </p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon-wrap" style="background:rgba(239,68,68,.12);">🛡️</div>
+        <h3>Saldırı Koruması</h3>
+        <p>
+          Kötü niyetli kişilerin şifre tahmin etmesini önlemek için
+          giriş ekranına dakikada en fazla 5 deneme sınırı konulmuştur.
+          Başarısız girişimler günlüklere kaydedilir.
+        </p>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-icon-wrap" style="background:rgba(15,163,110,.12);">📱</div>
+        <h3>Android & iOS Desteği</h3>
+        <p>
+          Hangi telefonu kullandığınızın önemi yok. Android ve iOS için
+          ayrı ayrı geliştirilmiş uygulamalar mevcuttur.
+          Her ikisi de aynı özellikleri sunar.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ ROLES ═══════════════════════════════ -->
+<section class="section" id="roles" style="background:var(--bg2);">
+  <div class="section-inner">
+    <div class="section-tag reveal">Kullanıcı Rolleri</div>
+    <h2 class="section-title reveal">Kim Ne Yapabilir?</h2>
+    <p class="section-desc reveal">
+      Sistem, okul ortamına uygun iki farklı kullanıcı rolüyle gelir.
+    </p>
+
+    <div class="roles-grid">
+      <div class="role-card role-admin reveal-left">
+        <div class="role-avatar" style="background:rgba(26,122,191,.12); font-size:1.8rem;">👨‍💼</div>
+        <span class="badge badge-blue" style="margin-bottom:12px;">Yönetici (Admin)</span>
+        <h3>Okul Yöneticisi veya BT Sorumlusu</h3>
+        <p class="role-desc">
+          Sistemi kuran ve yöneten kişidir. Tüm tahtaları ve tüm kullanıcıları
+          görüp yönetebilir.
+        </p>
+        <ul class="role-perms">
+          <li>Tüm akıllı tahtalara erişebilir ve komut gönderebilir</li>
+          <li>Sisteme yeni öğretmen hesabı ekleyebilir</li>
+          <li>Her öğretmene hangi tahtaları kullanabileceğini belirler</li>
+          <li>Tüm denetim günlüklerini görüntüleyebilir</li>
+          <li>Tahta ekleyebilir, devre dışı bırakabilir veya silebilir</li>
+          <li>Şifre sıfırlama yapabilir</li>
+        </ul>
+      </div>
+
+      <div class="role-card role-teacher reveal-right">
+        <div class="role-avatar" style="background:rgba(15,163,110,.12); font-size:1.8rem;">👩‍🏫</div>
+        <span class="badge badge-green" style="margin-bottom:12px;">Öğretmen (Teacher)</span>
+        <h3>Derslik Öğretmeni</h3>
+        <p class="role-desc">
+          Günlük olarak sistemi kullanan kişidir. Sadece kendisine atanan
+          tahtaları görür ve kontrol edebilir.
+        </p>
+        <ul class="role-perms">
+          <li>Kendisine atanan tahtaları görebilir</li>
+          <li>QR okutarak tahtaya bağlanabilir</li>
+          <li>Kilit açma ve kilitleme komutu gönderebilir</li>
+          <li>Önceki / sonraki slayt komutu gönderebilir</li>
+          <li>Başka öğretmenlerin tahtalarına erişemez</li>
+          <li>Admin paneline giremez</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ COMPONENTS ═══════════════════════════════ -->
+<section class="section" id="components">
+  <div class="section-inner">
+    <div class="section-tag reveal">Bileşenler</div>
+    <h2 class="section-title reveal">Sistem Nasıl Yapılandırılmış?</h2>
+    <p class="section-desc reveal">
+      Sistem dört ana bileşenden oluşur. Her biri kendi görevini yapar ve birlikte çalışır.
+    </p>
+
+    <div class="comp-grid">
+      <div class="comp-card comp-c1 reveal">
+        <span class="badge badge-blue" style="margin-bottom:14px;">Sunucu</span>
+        <h3>Merkezi Sunucu</h3>
+        <p>
+          Tüm sistemin beynidir. Kullanıcı girişlerini kontrol eder,
+          komutları kuyruğa alır, yetki denetimini yapar. Web tabanlı
+          yönetici paneli de burada çalışır.
+        </p>
+      </div>
+      <div class="comp-card comp-c2 reveal">
+        <span class="badge badge-green" style="margin-bottom:14px;">Tahta Ajanı</span>
+        <h3>Tahta İstemci Uygulaması</h3>
+        <p>
+          Her akıllı tahtada arka planda çalışır. Ekranda QR kod gösterir,
+          sunucuyu düzenli olarak kontrol eder, komut geldiğinde anında
+          uygular (kilit, slayt vb.).
+        </p>
+      </div>
+      <div class="comp-card comp-c3 reveal">
+        <span class="badge badge-orange" style="margin-bottom:14px;">Android Uygulama</span>
+        <h3>Android Uygulaması</h3>
+        <p>
+          Android telefonlar için QR tarama ve komut gönderme uygulaması.
+          Öğretmen paneli ve yönetici paneli dahildir.
+        </p>
+      </div>
+      <div class="comp-card comp-c4 reveal">
+        <span class="badge badge-purple" style="margin-bottom:14px;">iOS Uygulama</span>
+        <h3>iOS Uygulaması</h3>
+        <p>
+          iPhone ve iPad için QR tarama ve komut gönderme uygulaması.
+          Sezgisel arayüzüyle kolay kullanım sunar.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ SECURITY ═══════════════════════════════ -->
+<section class="section" id="security" style="background:var(--bg2);">
+  <div class="section-inner">
+    <div class="section-tag reveal">Güvenlik</div>
+    <h2 class="section-title reveal">Güvenli mi? Evet, çünkü…</h2>
+    <p class="section-desc reveal">
+      Sistem tasarlanırken güvenlik önce düşünüldü. İşte size güven veren temel önlemler.
+    </p>
+
+    <div class="sec-grid">
+      <div class="sec-item reveal">
+        <div class="sec-check">🎯</div>
+        <div>
+          <strong>Tahta Odaklı Komutlar</strong>
+          <p>Her komut mutlaka belirli bir tahtayı hedef almalıdır. "Tüm tahtaları aç" gibi toplu komutlar sistem tarafından otomatik olarak reddedilir.</p>
+        </div>
+      </div>
+      <div class="sec-item reveal">
+        <div class="sec-check">🔑</div>
+        <div>
+          <strong>Tahta Kimlik Doğrulaması</strong>
+          <p>Her tahta kendine özel gizli bir anahtar (agent secret) ile sunucuya bağlanır. Bu anahtar olmadan tahta sunucuyla iletişim kuramaz.</p>
+        </div>
+      </div>
+      <div class="sec-item reveal">
+        <div class="sec-check">🚫</div>
+        <div>
+          <strong>Deneme Sınırı</strong>
+          <p>Giriş ekranında dakikada en fazla 5 deneme hakkı vardır. Şifre kırmaya yönelik otomatik saldırılar bu sayede engellenir.</p>
+        </div>
+      </div>
+      <div class="sec-item reveal">
+        <div class="sec-check">🔐</div>
+        <div>
+          <strong>Şifreli Parola Saklama</strong>
+          <p>Hiçbir şifre veritabanında düz metin olarak tutulmaz. Güçlü hash algoritması kullanılır; veritabanı ele geçirilse bile şifreler okunamaz.</p>
+        </div>
+      </div>
+      <div class="sec-item reveal">
+        <div class="sec-check">⏱️</div>
+        <div>
+          <strong>Otomatik Komut İptali</strong>
+          <p>Gönderilen komutlar 30 saniye geçerliliğini korur. Tahta bu sürede almazsa komut iptal edilir; daha sonra yeniden çalışmaz.</p>
+        </div>
+      </div>
+      <div class="sec-item reveal">
+        <div class="sec-check">📝</div>
+        <div>
+          <strong>Tüm İşlemler Kayıt Altında</strong>
+          <p>Başarılı veya başarısız her işlem, kullanıcı adı ve IP adresiyle birlikte denetim günlüğüne yazılır. Şüpheli faaliyetler kolayca tespit edilir.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ CTA ═══════════════════════════════ -->
+<div class="cta-section">
+  <h2 class="reveal">Okulunuzda Kullanmaya Başlayın</h2>
+  <p class="reveal">
+    İlk 2 ay ücretsiz deneme fırsatıyla Pardus Akıllı Tahta Kilit Sistemini
+    okulunuzda deneyin. Sorularınız için bizimle iletişime geçin.
+  </p>
+  <div class="cta-btns reveal">
+    <a href="indir.html" class="btn btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="7 10 12 15 17 10"/>
+        <line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Ücretsiz İndir
+    </a>
+    <a href="iletisim.html" class="btn btn-secondary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+      İletişime Geç
+    </a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/img/favicon.png" alt="Pardus Lock" style="width:34px;height:34px;border-radius:9px;" />
+        Pardus Lock
+      </a>
+      <p>
+        Pardus işletim sistemli akıllı tahtaları mobil uygulama ile
+        güvenli ve kolay yönetmek için geliştirilmiş sistem.
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Sayfalar</h4>
+      <ul>
+        <li><a href="#how">Nasıl Çalışır</a></li>
+        <li><a href="#features">Özellikler</a></li>
+        <li><a href="sss.html">SSS</a></li>
+        <li><a href="fiyat.html">Fiyatlandırma</a></li>
+        <li><a href="indir.html">İndir</a></li>
+        <li><a href="iletisim.html">İletişim</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Proje</h4>
+      <ul>
+        <li><a href="https://www.pardus.org.tr" target="_blank" rel="noopener">Pardus Resmi Site</a></li>
+        <li><a href="indir.html">İndir</a></li>
+        <li><a href="iletisim.html">Hata Bildir</a></li>
+        <li><a href="iletisim.html">İletişim</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-school">
+      🏫 Pendik İTO Ticaret Meslek ve Teknik Anadolu Lisesi — Öğrenci Projesi
+    </div>
+    <span>Geliştirmeye devam etmektedir</span>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

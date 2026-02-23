@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  pardus-pwa:
+    build: .
+    container_name: pardus-pwa
+    restart: unless-stopped
+    ports:
+      - "4235:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

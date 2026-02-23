@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Süper Admin — Pardus Lock</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg:       #080e1a;
+            --bg2:      #0d1529;
+            --bg3:      #111e36;
+            --card:     #0f1c33;
+            --sidebar-w: 256px;
+            --border:   rgba(255,255,255,0.06);
+            --border-b: rgba(59,130,246,0.28);
+            --blue:     #3b82f6;
+            --blue-d:   rgba(59,130,246,0.14);
+            --green:    #10b981;
+            --green-d:  rgba(16,185,129,0.14);
+            --red:      #ef4444;
+            --red-d:    rgba(239,68,68,0.14);
+            --orange:   #f59e0b;
+            --orange-d: rgba(245,158,11,0.14);
+            --purple:   #8b5cf6;
+            --text:     #f1f5f9;
+            --text2:    #94a3b8;
+            --text3:    #4b6280;
+            --radius:   14px;
+            --rsm:      9px;
+            --shadow:   0 24px 64px rgba(0,0,0,0.55);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ── SIDEBAR ── */
+        .sidebar {
+            width: var(--sidebar-w);
+            background: var(--bg2);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            top: 0; left: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            z-index: 40;
+            overflow-y: auto;
+        }
+
+        .sb-logo {
+            padding: 22px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .sb-logo-icon {
+            width: 38px; height: 38px;
+            background: linear-gradient(135deg, var(--blue), #1d4ed8);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(59,130,246,0.35);
+        }
+
+        .sb-logo-text { display: flex; flex-direction: column; }
+        .sb-logo-title { font-size: 0.92rem; font-weight: 800; color: var(--text); letter-spacing: -.01em; }
+        .sb-logo-sub   { font-size: 0.62rem; color: var(--text3); font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+
+        .sb-nav { padding: 14px 12px; flex: 1; }
+
+        .sb-section-label {
+            font-size: 0.6rem; font-weight: 700; color: var(--text3);
+            letter-spacing: .1em; text-transform: uppercase;
+            padding: 0 10px; margin: 14px 0 5px;
+        }
+
+        .sb-item {
+            display: flex; align-items: center; gap: 9px;
+            padding: 8px 10px;
+            border-radius: var(--rsm);
+            color: var(--text2);
+            text-decoration: none;
+            font-size: 0.84rem; font-weight: 500;
+            transition: all .18s;
+            margin-bottom: 1px;
+            cursor: pointer;
+        }
+        .sb-item:hover  { background: rgba(255,255,255,0.05); color: var(--text); }
+        .sb-item.active { background: var(--blue-d); color: var(--blue); }
+        .sb-item svg    { flex-shrink: 0; opacity: .65; }
+        .sb-item.active svg { opacity: 1; }
+
+        .sb-footer {
+            padding: 14px;
+            border-top: 1px solid var(--border);
+        }
+
+        .sb-user {
+            display: flex; align-items: center; gap: 9px;
+            padding: 9px 11px;
+            background: var(--bg3);
+            border-radius: var(--rsm);
+        }
+
+        .sb-avatar {
+            width: 32px; height: 32px;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.72rem; font-weight: 800; color: #fff;
+            flex-shrink: 0;
+        }
+
+        .sb-uinfo { flex: 1; min-width: 0; }
+        .sb-uname { font-size: 0.82rem; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .sb-urole { font-size: 0.62rem; color: var(--blue); font-weight: 600; }
+
+        .sb-logout {
+            padding: 6px; background: transparent; border: none;
+            color: var(--text3); border-radius: 6px; cursor: pointer;
+            text-decoration: none; display: flex; align-items: center;
+            transition: color .18s;
+        }
+        .sb-logout:hover { color: var(--red); }
+
+        /* ── MAIN ── */
+        .main { margin-left: var(--sidebar-w); flex: 1; min-height: 100vh; }
+
+        .topbar {
+            height: 60px;
+            background: rgba(8,14,26,.82);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 30px;
+            position: sticky; top: 0; z-index: 30;
+        }
+
+        .tb-left { display: flex; flex-direction: column; }
+        .tb-heading { font-size: 1rem; font-weight: 800; color: var(--text); }
+        .tb-sub { font-size: 0.68rem; color: var(--text3); }
+
+        .btn-logout {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 7px 15px;
+            background: var(--red-d);
+            color: var(--red);
+            border: 1px solid rgba(239,68,68,.25);
+            border-radius: var(--rsm);
+            font-size: 0.78rem; font-weight: 600;
+            cursor: pointer; text-decoration: none;
+            transition: background .18s;
+        }
+        .btn-logout:hover { background: rgba(239,68,68,.24); }
+
+        /* ── PAGE ── */
+        .page { padding: 26px 30px 64px; }
+
+        /* ── STATS ── */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 26px;
+        }
+
+        .sc {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px 22px;
+            position: relative; overflow: hidden;
+            transition: transform .2s, border-color .2s;
+        }
+        .sc:hover { transform: translateY(-2px); }
+
+        .sc.s-total   { border-color: rgba(59,130,246,.18); }
+        .sc.s-active  { border-color: rgba(16,185,129,.18); }
+        .sc.s-expired { border-color: rgba(239,68,68,.18); }
+        .sc.s-passive { border-color: rgba(245,158,11,.18); }
+
+        .sc-glow {
+            position: absolute; top: -30px; right: -30px;
+            width: 110px; height: 110px;
+            border-radius: 50%; opacity: .07;
+        }
+        .s-total  .sc-glow { background: var(--blue); }
+        .s-active .sc-glow { background: var(--green); }
+        .s-expired .sc-glow { background: var(--red); }
+        .s-passive .sc-glow { background: var(--orange); }
+
+        .sc-icon {
+            width: 38px; height: 38px;
+            border-radius: 9px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 14px;
+        }
+        .s-total  .sc-icon { background: var(--blue-d);   color: var(--blue); }
+        .s-active .sc-icon { background: var(--green-d);  color: var(--green); }
+        .s-expired .sc-icon{ background: var(--red-d);    color: var(--red); }
+        .s-passive .sc-icon{ background: var(--orange-d); color: var(--orange); }
+
+        .sc-num {
+            font-size: 2.5rem; font-weight: 900; line-height: 1;
+            letter-spacing: -.03em; margin-bottom: 4px;
+        }
+        .s-total  .sc-num { color: var(--blue); }
+        .s-active .sc-num { color: var(--green); }
+        .s-expired .sc-num{ color: var(--red); }
+        .s-passive .sc-num{ color: var(--orange); }
+
+        .sc-label { font-size: 0.75rem; color: var(--text3); font-weight: 500; }
+
+        /* ── SECTION ── */
+        .section { margin-bottom: 22px; scroll-margin-top: 76px; }
+
+        .sec-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 13px;
+        }
+
+        .sec-title {
+            display: flex; align-items: center; gap: 9px;
+        }
+
+        .sec-title h2 { font-size: 0.98rem; font-weight: 800; color: var(--text); }
+
+        .count-tag {
+            background: var(--bg3);
+            color: var(--text3);
+            font-size: 0.67rem; font-weight: 700;
+            padding: 2px 8px; border-radius: 99px;
+            border: 1px solid var(--border);
+        }
+
+        /* ── CARD ── */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .card-body { padding: 22px; }
+
+        /* ── TABLE ── */
+        .tbl-wrap { overflow-x: auto; }
+
+        table { width: 100%; border-collapse: collapse; }
+
+        thead th {
+            text-align: left;
+            padding: 10px 15px;
+            font-size: 0.66rem; font-weight: 700; color: var(--text3);
+            text-transform: uppercase; letter-spacing: .08em;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+            background: rgba(255,255,255,0.015);
+        }
+
+        tbody td {
+            padding: 13px 15px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+            color: var(--text2); font-size: 0.84rem;
+        }
+
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr { transition: background .12s; }
+        tbody tr:hover td { background: rgba(255,255,255,0.022); }
+
+        .empty-row td {
+            text-align: center; color: var(--text3);
+            padding: 44px !important; font-size: 0.85rem;
+        }
+
+        .empty-inner {
+            display: flex; flex-direction: column;
+            align-items: center; gap: 9px;
+        }
+
+        /* ── BADGES ── */
+        .badge {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 3px 10px; border-radius: 99px;
+            font-size: 0.67rem; font-weight: 700; letter-spacing: .03em;
+        }
+        .badge::before {
+            content: ''; width: 6px; height: 6px;
+            border-radius: 50%; display: block; flex-shrink: 0;
+        }
+        .b-active  { background: var(--green-d);  color: var(--green);  border: 1px solid rgba(16,185,129,.22); }
+        .b-active::before  { background: var(--green); box-shadow: 0 0 4px var(--green); }
+        .b-expired { background: var(--red-d);    color: var(--red);    border: 1px solid rgba(239,68,68,.22); }
+        .b-expired::before { background: var(--red); }
+        .b-passive { background: var(--orange-d); color: var(--orange); border: 1px solid rgba(245,158,11,.22); }
+        .b-passive::before { background: var(--orange); }
+
+        .chip {
+            font-family: 'SF Mono','Fira Code','Courier New',monospace;
+            font-size: 0.76rem; font-weight: 700;
+            background: rgba(59,130,246,.1); color: #93c5fd;
+            padding: 3px 8px; border-radius: 6px;
+            border: 1px solid rgba(59,130,246,.18);
+        }
+
+        .unassigned-tag {
+            font-size: 0.72rem; color: var(--red); font-weight: 600;
+            background: var(--red-d); padding: 3px 9px;
+            border-radius: 99px; border: 1px solid rgba(239,68,68,.2);
+        }
+
+        .you-tag {
+            font-size: 0.62rem; color: var(--blue); font-weight: 700;
+            background: var(--blue-d); padding: 2px 7px;
+            border-radius: 99px; margin-left: 5px;
+        }
+
+        /* ── INSTALL CMD ── */
+        .install-wrap { display: flex; align-items: center; gap: 6px; }
+
+        .install-cmd {
+            font-family: 'SF Mono','Fira Code','Courier New',monospace;
+            font-size: 0.7rem;
+            background: var(--bg3); color: #93c5fd;
+            padding: 5px 9px; border-radius: 6px;
+            border: 1px solid var(--border-b);
+            white-space: nowrap; overflow: hidden;
+            text-overflow: ellipsis; max-width: 210px; display: block;
+        }
+
+        .btn-copy {
+            flex-shrink: 0;
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 4px 9px;
+            background: var(--blue-d); color: var(--blue);
+            border: 1px solid rgba(59,130,246,.22);
+            border-radius: 6px;
+            font-size: 0.68rem; font-weight: 600;
+            cursor: pointer; transition: all .14s; white-space: nowrap;
+        }
+        .btn-copy:hover  { background: rgba(59,130,246,.24); }
+        .btn-copy.copied { color: var(--green); border-color: rgba(16,185,129,.28); background: var(--green-d); }
+
+        /* ── BUTTONS ── */
+        .btn {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 7px 13px; border: none;
+            border-radius: var(--rsm);
+            font-size: 0.79rem; font-weight: 600;
+            cursor: pointer; transition: all .14s;
+            text-decoration: none; white-space: nowrap;
+            font-family: inherit;
+        }
+        .btn:hover  { opacity: .88; transform: translateY(-1px); }
+        .btn:active { transform: scale(.97); opacity: 1; }
+
+        .btn-sm { padding: 5px 10px; font-size: 0.74rem; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue), #1e40af);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(59,130,246,.28);
+        }
+        .btn-primary:hover { box-shadow: 0 6px 20px rgba(59,130,246,.38); opacity: 1; }
+
+        .btn-success { background: var(--green-d); color: var(--green); border: 1px solid rgba(16,185,129,.22); }
+        .btn-success:hover { background: rgba(16,185,129,.24); }
+
+        .btn-danger  { background: var(--red-d);    color: var(--red);    border: 1px solid rgba(239,68,68,.22); }
+        .btn-danger:hover  { background: rgba(239,68,68,.24); }
+
+        .btn-warn    { background: var(--orange-d); color: var(--orange); border: 1px solid rgba(245,158,11,.22); }
+        .btn-warn:hover    { background: rgba(245,158,11,.24); }
+
+        .btn-ghost   { background: rgba(255,255,255,.05); color: var(--text2); border: 1px solid var(--border); }
+        .btn-ghost:hover   { background: rgba(255,255,255,.09); }
+
+        .actions { display: flex; gap: 5px; align-items: center; }
+
+        /* ── ADD PANEL ── */
+        .add-panel {
+            background: rgba(255,255,255,.025);
+            border-top: 1px solid var(--border);
+            padding: 20px 22px;
+        }
+
+        .add-panel-title {
+            font-size: 0.8rem; font-weight: 700; color: var(--text2);
+            margin-bottom: 14px;
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        .add-panel-title::before {
+            content: ''; display: block;
+            width: 3px; height: 13px;
+            background: var(--blue); border-radius: 99px;
+        }
+
+        /* ── FORM ── */
+        .fgrid {
+            display: flex; flex-wrap: wrap;
+            gap: 11px; align-items: flex-end;
+        }
+
+        .fg { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 130px; }
+        .fg.narrow { max-width: 130px; }
+        .fg.auto   { flex: none; }
+
+        label {
+            font-size: 0.68rem; font-weight: 700; color: var(--text3);
+            letter-spacing: .05em; text-transform: uppercase;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="date"],
+        input[type="number"],
+        select,
+        textarea {
+            padding: 8px 11px;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            border-radius: var(--rsm);
+            font-size: 0.84rem; color: var(--text);
+            outline: none; transition: border-color .18s, box-shadow .18s;
+            font-family: inherit; width: 100%;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(59,130,246,.1);
+        }
+        input::placeholder { color: var(--text3); }
+        textarea { resize: vertical; min-height: 38px; }
+
+        .form-hint {
+            font-size: 0.7rem; color: var(--text3);
+            margin-top: 10px;
+            display: flex; align-items: center; gap: 5px;
+        }
+
+        /* ── MODAL ── */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,.72);
+            backdrop-filter: blur(7px);
+            z-index: 100;
+            align-items: center; justify-content: center;
+        }
+        .modal-overlay.open { display: flex; }
+
+        .modal {
+            background: var(--card);
+            border: 1px solid var(--border-b);
+            border-radius: var(--radius);
+            padding: 30px;
+            width: 100%; max-width: 370px;
+            box-shadow: var(--shadow);
+            animation: mIn .22s ease;
+        }
+
+        @keyframes mIn {
+            from { opacity: 0; transform: scale(.93) translateY(12px); }
+            to   { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-head {
+            display: flex; align-items: center; gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .modal-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            background: var(--orange-d); color: var(--orange);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .modal h3    { font-size: 0.96rem; font-weight: 700; color: var(--text); }
+        .modal-sub   { font-size: 0.74rem; color: var(--text3); margin-top: 1px; }
+
+        .modal-footer { display: flex; gap: 9px; margin-top: 18px; }
+        .modal-footer .btn { flex: 1; justify-content: center; }
+
+        /* ── MINI USER AVATAR ── */
+        .user-bubble {
+            display: flex; align-items: center; gap: 9px;
+        }
+        .mini-av {
+            width: 28px; height: 28px;
+            background: linear-gradient(135deg, var(--blue), var(--purple));
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.68rem; font-weight: 800; color: #fff;
+            flex-shrink: 0; text-transform: uppercase;
+        }
+
+        /* ── SCROLLBAR ── */
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.09); border-radius: 99px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.15); }
+
+        /* ── ASSIGN FORM ── */
+        .assign-form { display: flex; gap: 6px; align-items: center; }
+        .assign-form input { width: 130px !important; padding: 5px 9px !important; font-size: 0.79rem !important; }
+    </style>
+</head>
+<body>
+
+<!-- ══════════════════════ SIDEBAR ══════════════════════ -->
+<aside class="sidebar">
+    <div class="sb-logo">
+        <div class="sb-logo-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+        </div>
+        <div class="sb-logo-text">
+            <span class="sb-logo-title">Pardus Lock</span>
+            <span class="sb-logo-sub">Süper Admin</span>
+        </div>
+    </div>
+
+    <nav class="sb-nav">
+        <div class="sb-section-label">Genel Bakış</div>
+        <a href="#top" class="sb-item active" onclick="setActive(this)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+            </svg>
+            Dashboard
+        </a>
+
+        <div class="sb-section-label">Yönetim</div>
+        <a href="#licenses" class="sb-item" onclick="setActive(this)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14,2 14,8 20,8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+            Lisanslar
+        </a>
+        <a href="#boards" class="sb-item" onclick="setActive(this)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+            Tahtalar
+        </a>
+        <a href="#school-admins" class="sb-item" onclick="setActive(this)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            Okul Adminleri
+        </a>
+        <a href="#panel-users" class="sb-item" onclick="setActive(this)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            Panel Kullanıcıları
+        </a>
+
+        <div class="sb-section-label">Hızlı İşlem</div>
+        <a href="#new-license" class="sb-item" onclick="setActive(this)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="16"/>
+                <line x1="8" y1="12" x2="16" y2="12"/>
+            </svg>
+            Yeni Lisans Ekle
+        </a>
+    </nav>
+
+    <div class="sb-footer">
+        <div class="sb-user">
+            <div class="sb-avatar" id="sidebarAvatar">SA</div>
+            <div class="sb-uinfo">
+                <div class="sb-uname">{{ current_user }}</div>
+                <div class="sb-urole">Süper Admin</div>
+            </div>
+            <a href="/sa/logout" class="sb-logout" title="Çıkış Yap">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                    <polyline points="16,17 21,12 16,7"/>
+                    <line x1="21" y1="12" x2="9" y2="12"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</aside>
+
+<!-- ══════════════════════ MAIN ══════════════════════ -->
+<main class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar" id="top">
+        <div class="tb-left">
+            <span class="tb-heading">Yönetim Paneli</span>
+            <span class="tb-sub" id="dateDisplay"></span>
+        </div>
+        <a href="/sa/logout" class="btn-logout">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                <polyline points="16,17 21,12 16,7"/>
+                <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            Çıkış Yap
+        </a>
+    </div>
+
+    <div class="page">
+
+        <!-- İSTATİSTİKLER -->
+        {% set total        = licenses | length %}
+        {% set active_list  = licenses | selectattr('active', 'equalto', 1) | list %}
+        {% set expired_list = active_list | selectattr('end_date', 'lt', today) | list %}
+        {% set running_list = active_list | selectattr('end_date', 'ge', today) | list %}
+        {% set passive_list = licenses | selectattr('active', 'equalto', 0) | list %}
+
+        <div class="stats">
+            <div class="sc s-total">
+                <div class="sc-glow"></div>
+                <div class="sc-icon">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14,2 14,8 20,8"/>
+                    </svg>
+                </div>
+                <div class="sc-num">{{ total }}</div>
+                <div class="sc-label">Toplam Lisans</div>
+            </div>
+            <div class="sc s-active">
+                <div class="sc-glow"></div>
+                <div class="sc-icon">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20,6 9,17 4,12"/>
+                    </svg>
+                </div>
+                <div class="sc-num">{{ running_list | length }}</div>
+                <div class="sc-label">Aktif / Devam Eden</div>
+            </div>
+            <div class="sc s-expired">
+                <div class="sc-glow"></div>
+                <div class="sc-icon">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="15" y1="9" x2="9" y2="15"/>
+                        <line x1="9" y1="9" x2="15" y2="15"/>
+                    </svg>
+                </div>
+                <div class="sc-num">{{ expired_list | length }}</div>
+                <div class="sc-label">Süresi Dolmuş</div>
+            </div>
+            <div class="sc s-passive">
+                <div class="sc-glow"></div>
+                <div class="sc-icon">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="10" y1="15" x2="10" y2="9"/>
+                        <line x1="14" y1="15" x2="14" y2="9"/>
+                    </svg>
+                </div>
+                <div class="sc-num">{{ passive_list | length }}</div>
+                <div class="sc-label">Pasif</div>
+            </div>
+        </div>
+
+        <!-- ═══ LİSANSLAR ═══ -->
+        <div class="section" id="licenses">
+            <div class="sec-header">
+                <div class="sec-title">
+                    <h2>Demo Lisansları</h2>
+                    <span class="count-tag">{{ total }}</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="tbl-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Kurum Kodu</th>
+                                <th>Kurum Adı</th>
+                                <th>Başlangıç</th>
+                                <th>Bitiş</th>
+                                <th>Süre</th>
+                                <th>Durum</th>
+                                <th>Not</th>
+                                <th>Kurulum Komutu</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if licenses %}
+                                {% for lic in licenses %}
+                                {% if lic.active == 0 %}
+                                    {% set st = 'passive' %}{% set sl = 'Pasif' %}
+                                {% elif lic.end_date < today %}
+                                    {% set st = 'expired' %}{% set sl = 'Süresi Doldu' %}
+                                {% else %}
+                                    {% set st = 'active' %}{% set sl = 'Aktif' %}
+                                {% endif %}
+                                <tr>
+                                    <td><span class="chip">{{ lic.school_code }}</span></td>
+                                    <td style="color:var(--text);font-weight:600;">{{ lic.school_name }}</td>
+                                    <td>{{ lic.start_date }}</td>
+                                    <td style="color:var(--text);font-weight:600;">{{ lic.end_date }}</td>
+                                    <td>{{ lic.duration_months }} ay</td>
+                                    <td><span class="badge b-{{ st }}">{{ sl }}</span></td>
+                                    <td style="color:var(--text3);font-size:0.78rem;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ lic.notes or '—' }}</td>
+                                    <td>
+                                        <div class="install-wrap">
+                                            <code class="install-cmd">curl -sSL .../install/{{ lic.school_code }} | bash</code>
+                                            <button class="btn-copy"
+                                                    onclick="copyCmd(this)"
+                                                    data-cmd="curl -sSL http://YOUR_SERVER_IP:5000/install/{{ lic.school_code }} | bash">
+                                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    <rect x="9" y="9" width="13" height="13" rx="2"/>
+                                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                                </svg>
+                                                Kopyala
+                                            </button>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="actions">
+                                            <form method="POST" action="/sa/license/{{ lic.id }}/toggle">
+                                                <button type="submit" class="btn btn-sm {% if lic.active %}btn-warn{% else %}btn-success{% endif %}">
+                                                    {% if lic.active %}Kapat{% else %}Aç{% endif %}
+                                                </button>
+                                            </form>
+                                            <form method="POST" action="/sa/license/{{ lic.id }}/delete"
+                                                  onsubmit="return confirm('{{ lic.school_name }} lisansı silinsin mi?')">
+                                                <button type="submit" class="btn btn-sm btn-danger">Sil</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr class="empty-row">
+                                    <td colspan="9">
+                                        <div class="empty-inner">
+                                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                                <polyline points="14,2 14,8 20,8"/>
+                                            </svg>
+                                            Henüz lisans eklenmemiş.
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ TAHTALAR ═══ -->
+        <div class="section" id="boards">
+            <div class="sec-header">
+                <div class="sec-title">
+                    <h2>Tahtalar — Okul Ataması</h2>
+                    <span class="count-tag">{{ all_boards | length }}</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="tbl-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tahta ID</th>
+                                <th>Ad</th>
+                                <th>Konum</th>
+                                <th>Mevcut Okul Kodu</th>
+                                <th>Yeni Okul Kodu Ata</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if all_boards %}
+                                {% for b in all_boards %}
+                                <tr>
+                                    <td><span class="chip">{{ b.board_id }}</span></td>
+                                    <td style="color:var(--text);font-weight:600;">{{ b.name }}</td>
+                                    <td>{{ b.location or '—' }}</td>
+                                    <td>
+                                        {% if b.school_code %}
+                                            <span class="chip">{{ b.school_code }}</span>
+                                        {% else %}
+                                            <span class="unassigned-tag">Atanmamış</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="/sa/board/assign" class="assign-form">
+                                            <input type="hidden" name="board_id" value="{{ b.board_id }}">
+                                            <input type="text" name="school_code"
+                                                   value="{{ b.school_code or '' }}"
+                                                   placeholder="KURUM_KODU">
+                                            <button type="submit" class="btn btn-sm btn-success">Ata</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="/sa/board/delete"
+                                              onsubmit="return confirm('{{ b.board_id }} tahtası silinsin mi? Bu işlem geri alınamaz.')">
+                                            <input type="hidden" name="board_id" value="{{ b.board_id }}">
+                                            <button type="submit" class="btn btn-sm btn-danger">Sil</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr class="empty-row">
+                                    <td colspan="6">
+                                        <div class="empty-inner">
+                                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                                <line x1="12" y1="17" x2="12" y2="21"/>
+                                            </svg>
+                                            Henüz kayıtlı tahta yok.
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ OKUL ADMİN HESAPLARI ═══ -->
+        <div class="section" id="school-admins">
+            <div class="sec-header">
+                <div class="sec-title">
+                    <h2>Okul Admin Hesapları</h2>
+                    <span class="count-tag">{{ school_admins | length }}</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="tbl-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Kurum Kodu</th>
+                                <th>Ad Soyad</th>
+                                <th>Kullanıcı Adı</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if school_admins %}
+                                {% for adm in school_admins %}
+                                <tr>
+                                    <td><span class="chip">{{ adm.school_code or '—' }}</span></td>
+                                    <td style="color:var(--text);font-weight:600;">{{ adm.full_name }}</td>
+                                    <td>{{ adm.username }}</td>
+                                    <td>
+                                        <form method="POST" action="/sa/school_admin/{{ adm.id }}/delete"
+                                              onsubmit="return confirm('{{ adm.username }} silinsin mi?')">
+                                            <button type="submit" class="btn btn-sm btn-danger">Sil</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr class="empty-row">
+                                    <td colspan="4">Henüz okul admin hesabı eklenmemiş.</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="add-panel">
+                    <div class="add-panel-title">Yeni Okul Admin Hesabı Ekle</div>
+                    <form method="POST" action="/sa/school_admin/add">
+                        <div class="fgrid">
+                            <div class="fg narrow">
+                                <label>Kurum Kodu *</label>
+                                <input type="text" name="school_code" placeholder="34290PITOMTAL" required>
+                            </div>
+                            <div class="fg">
+                                <label>Ad Soyad *</label>
+                                <input type="text" name="full_name" placeholder="Ahmet Yılmaz" required>
+                            </div>
+                            <div class="fg narrow">
+                                <label>Kullanıcı Adı *</label>
+                                <input type="text" name="username" placeholder="pitoadmin" required>
+                            </div>
+                            <div class="fg narrow">
+                                <label>Şifre (min 6 kar.) *</label>
+                                <input type="password" name="password" placeholder="••••••••" required minlength="6">
+                            </div>
+                            <div class="fg auto" style="align-self:flex-end;">
+                                <button type="submit" class="btn btn-primary">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                                    </svg>
+                                    Ekle
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ PANEL KULLANICILARI ═══ -->
+        <div class="section" id="panel-users">
+            <div class="sec-header">
+                <div class="sec-title">
+                    <h2>Panel Kullanıcıları (Süper Admin)</h2>
+                    <span class="count-tag">{{ managers | length }}</span>
+                </div>
+            </div>
+            <div class="card">
+                <div class="tbl-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Kullanıcı Adı</th>
+                                <th>Eklenme Tarihi</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for mgr in managers %}
+                            <tr>
+                                <td>
+                                    <div class="user-bubble">
+                                        <div class="mini-av">{{ mgr.username[0] }}</div>
+                                        <strong style="color:var(--text);">{{ mgr.username }}</strong>
+                                        {% if mgr.id == current_sa_id %}
+                                        <span class="you-tag">sen</span>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                                <td>{{ mgr.created_at[:10] }}</td>
+                                <td>
+                                    <div class="actions">
+                                        <button class="btn btn-sm btn-warn"
+                                                onclick="openPwModal({{ mgr.id }}, '{{ mgr.username }}')">
+                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                            </svg>
+                                            Şifre
+                                        </button>
+                                        {% if mgr.id != current_sa_id %}
+                                        <form method="POST" action="/sa/managers/{{ mgr.id }}/delete"
+                                              onsubmit="return confirm('{{ mgr.username }} silinsin mi?')">
+                                            <button type="submit" class="btn btn-sm btn-danger">Sil</button>
+                                        </form>
+                                        {% endif %}
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="add-panel">
+                    <div class="add-panel-title">Yeni Kullanıcı Ekle</div>
+                    <form method="POST" action="/sa/managers/add">
+                        <div class="fgrid">
+                            <div class="fg narrow">
+                                <label>Kullanıcı Adı</label>
+                                <input type="text" name="username" placeholder="kullanici" required>
+                            </div>
+                            <div class="fg narrow">
+                                <label>Şifre (min 6 kar.)</label>
+                                <input type="password" name="password" placeholder="••••••••" required minlength="6">
+                            </div>
+                            <div class="fg auto" style="align-self:flex-end;">
+                                <button type="submit" class="btn btn-primary">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                                    </svg>
+                                    Ekle
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ YENİ LİSANS ═══ -->
+        <div class="section" id="new-license">
+            <div class="sec-header">
+                <div class="sec-title">
+                    <h2>Yeni Lisans Ekle</h2>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="/sa/license/add">
+                        <div class="fgrid">
+                            <div class="fg narrow">
+                                <label>Kurum Kodu *</label>
+                                <input type="text" name="school_code" placeholder="PITOMTAL"
+                                       title="Büyük harf ve rakam kullanılabilir." required>
+                            </div>
+                            <div class="fg" style="min-width:180px;">
+                                <label>Kurum Adı *</label>
+                                <input type="text" name="school_name" placeholder="Pendik İTO MTAL" required>
+                            </div>
+                            <div class="fg narrow">
+                                <label>Başlangıç Tarihi *</label>
+                                <input type="date" name="start_date" value="{{ today }}" required>
+                            </div>
+                            <div class="fg" style="max-width:100px;">
+                                <label>Süre (ay) *</label>
+                                <input type="number" name="duration_months" value="2" min="1" max="60" required>
+                            </div>
+                            <div class="fg" style="min-width:150px;">
+                                <label>Not</label>
+                                <input type="text" name="notes" placeholder="İsteğe bağlı not">
+                            </div>
+                            <div class="fg auto" style="align-self:flex-end;">
+                                <button type="submit" class="btn btn-primary">
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                                    </svg>
+                                    Lisans Ekle
+                                </button>
+                            </div>
+                        </div>
+                        <p class="form-hint">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="16" x2="12" y2="12"/>
+                                <line x1="12" y1="8" x2="12.01" y2="8"/>
+                            </svg>
+                            Bitiş tarihi otomatik hesaplanır: Başlangıç + Süre (ay)
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /page -->
+</main>
+
+<!-- ══════════════════════ ŞİFRE MODALı ══════════════════════ -->
+<div id="pwModal" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-head">
+            <div class="modal-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+            </div>
+            <div>
+                <h3 id="pwModalTitle">Şifre Değiştir</h3>
+                <div class="modal-sub">En az 6 karakter olmalıdır.</div>
+            </div>
+        </div>
+        <form method="POST" id="pwModalForm" action="">
+            <div class="fg" style="margin-bottom:4px;">
+                <label>Yeni Şifre</label>
+                <input type="password" name="new_password"
+                       placeholder="En az 6 karakter" required minlength="6">
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="closePwModal()" class="btn btn-ghost">İptal</button>
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Tarih göster
+    const dateEl = document.getElementById('dateDisplay');
+    if (dateEl) {
+        dateEl.textContent = new Date().toLocaleDateString('tr-TR', {
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+        });
+    }
+
+    // Sidebar avatar baş harfi
+    const av = document.getElementById('sidebarAvatar');
+    if (av) {
+        const u = '{{ current_user }}';
+        av.textContent = u ? u[0].toUpperCase() : 'SA';
+    }
+
+    // Sidebar aktif item
+    function setActive(el) {
+        document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
+    }
+
+    // Şifre modalı
+    function openPwModal(id, username) {
+        document.getElementById('pwModalTitle').textContent = username + ' — Şifre Değiştir';
+        document.getElementById('pwModalForm').action = '/sa/managers/' + id + '/password';
+        document.getElementById('pwModal').classList.add('open');
+    }
+
+    function closePwModal() {
+        document.getElementById('pwModal').classList.remove('open');
+    }
+
+    document.getElementById('pwModal').addEventListener('click', function(e) {
+        if (e.target === this) closePwModal();
+    });
+
+    // Kopyala komutu
+    function copyCmd(btn) {
+        const text = btn.getAttribute('data-cmd');
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(() => flashCopied(btn));
+        } else {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;';
+            document.body.appendChild(ta);
+            ta.focus(); ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            flashCopied(btn);
+        }
+    }
+
+    function flashCopied(btn) {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg> Kopyalandı!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 1800);
+    }
+</script>
+</body>
+</html>

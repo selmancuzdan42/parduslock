@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahta Kontrolü</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #2C3E50, #4CA1AF);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.97);
+            border-radius: 16px;
+            padding: 36px 32px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .header h2 {
+            font-size: 1.25rem;
+            color: #2C3E50;
+            font-weight: 700;
+        }
+
+        .header .user-info {
+            font-size: 0.85rem;
+            color: #4CA1AF;
+            margin-top: 6px;
+            font-weight: 600;
+        }
+
+        .role-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-top: 6px;
+        }
+
+        .role-admin   { background: #fdecea; color: #c0392b; }
+        .role-teacher { background: #eaf6fb; color: #2980b9; }
+
+        .board-select-wrap {
+            margin-bottom: 20px;
+        }
+
+        .board-select-wrap label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #7f8c8d;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #dce1e7;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            color: #2C3E50;
+            background: white;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%234CA1AF' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+        }
+
+        select:focus { outline: none; border-color: #4CA1AF; }
+
+        .no-board {
+            text-align: center;
+            color: #e74c3c;
+            font-size: 0.9rem;
+            padding: 12px;
+            background: #fdecea;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+
+        .btn:active { transform: scale(0.97); }
+        .btn:hover  { opacity: 0.88; }
+        .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+        .btn-unlock {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            color: white;
+        }
+
+        .btn-lock {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            color: white;
+        }
+
+        .nav-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn-nav {
+            flex: 1;
+            padding: 13px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            background: #ecf0f1;
+            color: #2C3E50;
+            font-weight: 700;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .btn-nav:hover  { background: #bdc3c7; }
+        .btn-nav:active { transform: scale(0.95); }
+        .btn-nav:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+        .toast {
+            display: none;
+            text-align: center;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .toast.success { background: #d5f5e3; color: #1e8449; }
+        .toast.error   { background: #fdecea; color: #c0392b; }
+
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .links a {
+            font-size: 0.8rem;
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        .links a:hover { color: #e74c3c; }
+        .links a.admin-link { color: #4CA1AF; font-weight: 600; }
+        .links a.admin-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <h2>Tahta Kontrolü</h2>
+            <div class="user-info">{{ full_name }}</div>
+            <span class="role-badge role-{{ role }}">
+                {{ 'YÖNETİCİ' if role == 'admin' else 'ÖĞRETMEN' }}
+            </span>
+        </div>
+
+        {% if boards %}
+        <div class="board-select-wrap">
+            <label>Tahta Seç</label>
+            <select id="boardSelect">
+                {% for b in boards %}
+                <option value="{{ b.board_id }}">
+                    {{ b.name }}{% if b.location %} — {{ b.location }}{% endif %}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="toast" id="toast"></div>
+
+        <div class="btn-group">
+            <button class="btn btn-unlock" onclick="sendCommand('unlock')">Kilidi Aç</button>
+            <button class="btn btn-lock"   onclick="sendCommand('lock')">Kilitle</button>
+        </div>
+
+        <div class="nav-group">
+            <button class="btn-nav" onclick="sendCommand('prev')" title="Önceki slayt">&#8592;</button>
+            <button class="btn-nav" onclick="sendCommand('next')" title="Sonraki slayt">&#8594;</button>
+        </div>
+        {% else %}
+        <div class="no-board">
+            Size atanmış aktif tahta bulunmuyor.<br>Yöneticinizle iletişime geçin.
+        </div>
+        {% endif %}
+
+        <div class="links">
+            <a href="/logout">Oturumu Kapat</a>
+            {% if role == 'admin' %}
+            <a href="/admin" class="admin-link">Kullanıcı Yönetimi</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function sendCommand(cmd) {
+            const boardId = document.getElementById('boardSelect')?.value;
+            if (!boardId) return;
+
+            fetch('/api/send_command', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ board_id: boardId, command: cmd })
+            })
+            .then(r => r.json())
+            .then(data => showToast(data.status === 'ok', cmd))
+            .catch(() => showToast(false, cmd));
+        }
+
+        function showToast(success, cmd) {
+            const labels = {
+                unlock: 'Kilit açma komutu gönderildi',
+                lock:   'Kilitleme komutu gönderildi',
+                next:   'Sonraki slayt komutu gönderildi',
+                prev:   'Önceki slayt komutu gönderildi',
+            };
+            const toast = document.getElementById('toast');
+            toast.textContent = success ? labels[cmd] : 'Hata oluştu. Tekrar deneyin.';
+            toast.className   = 'toast ' + (success ? 'success' : 'error');
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+        }
+    </script>
+</body>
+</html>

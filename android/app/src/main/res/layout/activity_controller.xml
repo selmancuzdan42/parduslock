@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pardus_dark"
+    android:padding="16dp">
+
+    <!-- ── Header: İsim + Rol ── -->
+    <TextView
+        android:id="@+id/tvFullName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/on_surface"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@id/tvRoleBadge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvRoleBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_badge"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="4dp"
+        android:textColor="@color/pardus_dark"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tvFullName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvFullName" />
+
+    <!-- ── Tahta bilgi kartı ── -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardBoard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:cardBackgroundColor="#1E2D3D"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvFullName">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp">
+
+            <TextView
+                android:id="@+id/tvBoardDot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="●"
+                android:textSize="12sp"
+                android:textColor="#7A8FA0"
+                android:layout_marginEnd="10dp" />
+
+            <TextView
+                android:id="@+id/tvToken"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#AABBCC"
+                android:textSize="13sp"
+                android:ellipsize="end"
+                android:maxLines="1" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- ── Komut durum kartı (feedback) ── -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="#1A3A55"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardBoard">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp">
+
+            <TextView
+                android:id="@+id/tvStatusIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:layout_marginEnd="10dp" />
+
+            <TextView
+                android:id="@+id/tvStatusText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/on_surface"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- ── Kontrol butonları (2x2 ızgara) ── -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnUnlock"
+        style="@style/Widget.PardusLockApp.ControlButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/btn_unlock"
+        app:backgroundTint="@color/color_unlock"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@id/btnPrev"
+        app:layout_constraintEnd_toStartOf="@id/btnLock"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardStatus"
+        app:layout_constraintDimensionRatio="1:1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLock"
+        style="@style/Widget.PardusLockApp.ControlButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/btn_lock"
+        app:backgroundTint="@color/color_lock"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@id/btnNext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnUnlock"
+        app:layout_constraintTop_toBottomOf="@id/cardStatus"
+        app:layout_constraintDimensionRatio="1:1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPrev"
+        style="@style/Widget.PardusLockApp.ControlButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/btn_prev"
+        app:backgroundTint="@color/color_prev"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@id/btnAdminPanel"
+        app:layout_constraintEnd_toStartOf="@id/btnNext"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnUnlock"
+        app:layout_constraintDimensionRatio="1:1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnNext"
+        style="@style/Widget.PardusLockApp.ControlButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/btn_next"
+        app:backgroundTint="@color/color_next"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@id/btnAdminPanel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnPrev"
+        app:layout_constraintTop_toBottomOf="@id/btnLock"
+        app:layout_constraintDimensionRatio="1:1" />
+
+    <!-- ── Admin paneli butonu (sadece admin) ── -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAdminPanel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_admin_panel"
+        app:backgroundTint="@color/pardus_blue"
+        android:layout_marginTop="20dp"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toTopOf="@id/btnLogout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnPrev"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogout"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_logout"
+        app:strokeColor="@color/pardus_blue"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

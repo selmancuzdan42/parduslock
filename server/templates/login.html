@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pardus Akıllı Tahta - Giriş</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #2C3E50, #4CA1AF);
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 16px;
+            padding: 40px 36px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .logo-area {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .logo-area h1 {
+            font-size: 1.3rem;
+            color: #2C3E50;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo-area p {
+            font-size: 0.82rem;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        .divider {
+            width: 48px;
+            height: 3px;
+            background: linear-gradient(90deg, #2C3E50, #4CA1AF);
+            border-radius: 2px;
+            margin: 12px auto 0;
+        }
+
+        label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 6px;
+            margin-top: 18px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1.5px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            color: #2C3E50;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus { border-color: #4CA1AF; }
+
+        .error-box {
+            background: #fdecea;
+            border: 1px solid #f5c6cb;
+            color: #c0392b;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 0.88rem;
+            margin-top: 18px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            margin-top: 26px;
+            padding: 13px;
+            background: linear-gradient(135deg, #2C3E50, #4CA1AF);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: opacity 0.2s;
+        }
+
+        button[type="submit"]:hover { opacity: 0.9; }
+
+        .footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #bbb;
+            margin-top: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="logo-area">
+            <h1>PARDUS AKILLI TAHTA</h1>
+            <p>Millî Eğitim Bakanlığı</p>
+            <div class="divider"></div>
+        </div>
+
+        <form method="POST" action="/login">
+            <input type="hidden" name="token" value="{{ token }}">
+
+            <label for="username">Kullanıcı Adı</label>
+            <input type="text" id="username" name="username"
+                   placeholder="kullanici.adi" autocomplete="username" required>
+
+            <label for="password">Şifre</label>
+            <input type="password" id="password" name="password"
+                   placeholder="••••••••" autocomplete="current-password" required>
+
+            {% if error %}
+            <div class="error-box">{{ error }}</div>
+            {% endif %}
+
+            <button type="submit">Giriş Yap</button>
+        </form>
+
+        <div class="footer">Pardus Topluluğu &copy; 2026</div>
+    </div>
+</body>
+</html>

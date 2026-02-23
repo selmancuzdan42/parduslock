@@ -1,0 +1,80 @@
+# Gizli Anahtarlar ve Sertifikalar
+secret.key
+*.key
+board_secret.key
+*.pem
+*.p12
+*.keystore
+
+# Ortam Değişkenleri
+.env
+.env.local
+.env.production
+*.env.local
+
+# Veritabanı Dosyaları
+*.db
+*.sqlite
+*.sqlite3
+users.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+venv/
+.venv/
+env/
+
+# Android Build
+android/app/build/
+android/.gradle/
+android/local.properties
+android/captures/
+*.apk
+*.aab
+*.ap_
+
+# iOS Build
+ios/Pods/
+ios/build/
+ios/*.xcworkspace
+ios/DerivedData/
+*.xcuserstate
+
+# Binary / Dağıtım Dosyaları
+downloads/
+*.tar.gz
+*.zip
+*.elf
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.iml
+.project
+.classpath
+
+# İşletim Sistemi
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Docker Override
+docker-compose.override.yml
+
+# Loglar
+*.log
+logs/
+
+# Geçici Dosyalar
+tmp/
+temp/

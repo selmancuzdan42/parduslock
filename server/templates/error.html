@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Hata</title>
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #2C3E50, #4CA1AF);
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px 36px;
+            text-align: center;
+            max-width: 360px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .icon { font-size: 2.5rem; margin-bottom: 16px; }
+        h2 { color: #2C3E50; margin-bottom: 10px; }
+        p  { color: #888; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon">&#9888;&#65039;</div>
+        <h2>Bir sorun oluştu</h2>
+        <p>{{ message }}</p>
+    </div>
+</body>
+</html>
