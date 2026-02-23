@@ -16,6 +16,14 @@ Her akıllı tahta, ekranında benzersiz bir **QR kod** gösterir. Yetkilendiril
 
 ---
 
+## Ekran Görüntüleri
+
+| Tahta Kilit Ekranı | iOS Uygulama Girişi |
+|:-----------------:|:------------------:|
+| ![Tahta Kilit Ekranı](docs/1ekran.png) | ![iOS Arayüz](docs/iosarayuz.jpeg) |
+
+---
+
 ## Özellikler
 
 - Her tahta bağımsız olarak hedeflenir — tüm tahtalar aynı anda açılamaz/kapanamaz
